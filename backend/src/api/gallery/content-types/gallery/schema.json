@@ -1,0 +1,44 @@
+{
+  "kind": "collectionType",
+  "collectionName": "galleries",
+  "info": {
+    "singularName": "gallery",
+    "pluralName": "galleries",
+    "displayName": "Gallery",
+    "description": "Manage gallery images for the shop"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {
+    "content-manager": {
+      "listView": {
+        "columns": ["title", "category", "image"],
+        "defaultSortBy": "title",
+        "defaultSortOrder": "ASC",
+        "defaultColumns": ["title", "category", "image"]
+      }
+    }
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "category": {
+      "type": "enumeration",
+      "enum": [
+        "Hoa tươi",
+        "Không gian",
+        "Nghệ nhân"
+      ],
+      "required": true
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": ["images"]
+    }
+  }
+} 

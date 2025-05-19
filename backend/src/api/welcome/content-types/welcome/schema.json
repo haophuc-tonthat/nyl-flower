@@ -1,0 +1,48 @@
+{
+  "kind": "singleType",
+  "collectionName": "welcomes",
+  "info": {
+    "singularName": "welcome",
+    "pluralName": "welcomes",
+    "displayName": "Welcome",
+    "description": "Welcome section content for the homepage"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "default": "Chào mừng đến với Tiệm hoa cinh NYL"
+    },
+    "description": {
+      "type": "text",
+      "required": true,
+      "default": "Nơi mang đến những bó hoa tươi đẹp nhất, được thiết kế bởi các nghệ nhân với tình yêu và sự tận tâm."
+    },
+    "features": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.feature",
+      "required": true
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": ["images"]
+    },
+    "quote": {
+      "type": "text",
+      "required": true,
+      "default": "Mỗi bó hoa là một tác phẩm nghệ thuật, mang đến niềm vui và hạnh phúc cho người nhận."
+    },
+    "quoteAuthor": {
+      "type": "string",
+      "required": true,
+      "default": "Nghệ nhân cinh NYL"
+    }
+  }
+} 

@@ -1,0 +1,32 @@
+{
+  "kind": "singleType",
+  "collectionName": "sliders",
+  "info": {
+    "singularName": "slider",
+    "pluralName": "sliders",
+    "displayName": "Slider",
+    "description": "Slider content for the homepage"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "leftContent": {
+      "type": "text",
+      "required": true,
+      "default": "Khám phá vẻ đẹp tinh tế của những bông hoa tươi. Mỗi bó hoa được chăm chút tỉ mỉ, kết hợp giữa nét đẹp tự nhiên và sự tinh tế trong từng chi tiết, mang đến năng lượng tích cực cho không gian sống."
+    },
+    "rightContent": {
+      "type": "text",
+      "required": true,
+      "default": "Hoa tươi không chỉ là món quà tặng ý nghĩa, mà còn là tác phẩm nghệ thuật tự nhiên, tô điểm cho không gian sống của bạn thêm phần ấm áp và tươi sáng."
+    },
+    "slides": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.slide",
+      "required": true
+    }
+  }
+} 

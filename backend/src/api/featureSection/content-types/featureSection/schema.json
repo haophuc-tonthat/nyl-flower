@@ -1,0 +1,26 @@
+{
+  "kind": "singleType",
+  "collectionName": "feature_sections",
+  "info": {
+    "singularName": "feature-section",
+    "pluralName": "feature-sections",
+    "displayName": "Feature Section",
+    "description": "Feature section content for the homepage"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "features": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.feature",
+      "required": true
+    }
+  }
+} 

@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_shared_features",
+  "info": {
+    "displayName": "Feature",
+    "description": "A feature item with icon, title and description"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "icon": {
+      "type": "enumeration",
+      "enum": [
+        "plus",
+        "check",
+        "clock"
+      ],
+      "required": true
+    }
+  }
+} 

@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-garamond);
+  --font-serif: var(--font-garamond);
+}
+
+:root {
+  --foreground-rgb: 14, 14, 13;
+  --background-start-rgb: 253, 249, 240;
+  --background-end-rgb: 253, 249, 240;
+  font-size: 16px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* --background: #0a0a0a; */
+    --background: #fffbe8;
+    /* --foreground: #0a0a0a; */
+    --foreground: #0e0e0d;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+  font-family: var(--font-garamond), serif;
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  font-size: 1rem; /* This ensures the base font size is 16px */
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-garamond), serif;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}

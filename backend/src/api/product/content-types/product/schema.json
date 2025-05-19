@@ -1,0 +1,48 @@
+{
+  "kind": "collectionType",
+  "collectionName": "products",
+  "info": {
+    "singularName": "product",
+    "pluralName": "products",
+    "displayName": "Product",
+    "description": "Manage products for the shop"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {
+    "content-manager": {
+      "listView": {
+        "columns": ["name", "price", "images", "description"],
+        "defaultSortBy": "name",
+        "defaultSortOrder": "ASC",
+        "defaultColumns": ["name", "price", "images", "description"]
+      }
+    }
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "price": {
+      "type": "string",
+      "required": true
+    },
+    "images": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": ["images"],
+      "maxFiles": 4
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "details": {
+      "type": "json",
+      "required": true
+    }
+  }
+} 
