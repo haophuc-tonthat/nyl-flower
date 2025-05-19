@@ -6,8 +6,23 @@ import { Product } from "@/types/product";
 import Image from "next/image";
 import { motion } from "framer-motion";
 
+interface ProductImage {
+  url: string;
+  formats?: {
+    thumbnail?: {
+      url: string;
+    };
+  };
+}
+
 interface FeaturedProductsProps {
-  products: Product[];
+  products: {
+    id: number;
+    name: string;
+    price: string;
+    description: string;
+    images: ProductImage[];
+  }[];
 }
 
 const container = {
@@ -56,7 +71,7 @@ const FeaturedProducts: React.FC<FeaturedProductsProps> = ({ products }) => {
             >
               <div className="relative aspect-square w-full overflow-hidden rounded-xl">
                 <Image
-                  src={product.image}
+                  src={product.images[0]?.url || '/placeholder.jpg'}
                   alt={product.name}
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-105"

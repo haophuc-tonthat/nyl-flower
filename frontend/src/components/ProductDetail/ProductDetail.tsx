@@ -61,10 +61,11 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
               className="relative w-full h-[300px] md:h-[500px] overflow-hidden rounded-xl shadow-md"
             >
               <Image
-                src={selectedImage === 0 ? product.image : product.images[selectedImage - 1]}
+                src={product.images[selectedImage]}
                 alt={product.name}
                 fill
                 className="object-cover transition-transform duration-700 hover:scale-105"
+                sizes="(max-width: 768px) 100vw, 50vw"
               />
             </motion.div>
             <div className="grid grid-cols-4 gap-3">
@@ -73,9 +74,9 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
                   key={index}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  onClick={() => setSelectedImage(index + 1)}
+                  onClick={() => setSelectedImage(index)}
                   className={`relative w-full h-[100px] overflow-hidden rounded-lg transition-all duration-300 ${
-                    selectedImage === index + 1 
+                    selectedImage === index 
                       ? "ring-2 ring-[#e593cd] scale-105" 
                       : "hover:ring-1 hover:ring-[#e593cd]/50"
                   }`}
@@ -85,6 +86,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
                     alt={`${product.name} - ${index + 1}`}
                     fill
                     className="object-cover"
+                    sizes="(max-width: 768px) 25vw, 12.5vw"
                   />
                 </motion.button>
               ))}
