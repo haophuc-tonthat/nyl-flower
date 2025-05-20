@@ -14,6 +14,7 @@ export default [
         'https://sunflower-parisian.onrender.com',
         'https://api.sunflower-parisian.cloud',
         'https://www.sunflower-parisian.cloud',
+        'https://nyl-flower.vercel.app',
       ],
       methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'],
       headers: ['Content-Type', 'Authorization', 'Origin', 'Accept'],
