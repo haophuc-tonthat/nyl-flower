@@ -32,22 +32,11 @@ const nextConfig = {
     removeConsole: process.env.NODE_ENV === 'production',
   },
   experimental: {
-    optimizeCss: true,
     optimizePackageImports: ['framer-motion', 'swiper'],
   },
   env: {
-    NEXT_PUBLIC_API_URL: process.env.NODE_ENV === 'production' 
-      ? 'https://api.sunflower-parisian.cloud'
-      : 'http://localhost:1337',
-  },
-  async rewrites() {
-    return [
-      {
-        source: '/product/:id',
-        destination: '/product/[id]',
-      },
-    ]
-  },
+    NEXT_PUBLIC_API_URL: 'https://api.sunflower-parisian.cloud'
+  }
 };
 
 module.exports = nextConfig; 
