@@ -1,31 +1,61 @@
 import PageLayout from "@/components/PageLayout/PageLayout";
 import ProductDetail from "@/components/ProductDetail/ProductDetail";
 import { Metadata } from "next";
+import { notFound } from "next/navigation";
 
-type Props = {
-  params: Promise<{ id: string }>;
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
-};
+// Types
+interface Product {
+  id: number;
+  name: string;
+  price: string;
+  description: string;
+  details: string[];
+  images: {
+    url: string;
+    formats?: {
+      thumbnail?: {
+        url: string;
+      };
+    };
+  }[];
+}
 
-// Tạo các trang tĩnh cho từng sản phẩm
-export async function generateStaticParams() {
+// Constants
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
+// Helper functions
+async function fetchProduct(id: string): Promise<Product | null> {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/products`);
-    
+    const response = await fetch(`${API_URL}/api/products/${id}`, {
+      next: { revalidate: 60 }
+    });
+
     if (!response.ok) {
-      console.error(`API Error: ${response.status} ${response.statusText}`);
-      return [];
+      if (response.status === 404) return null;
+      throw new Error(`API Error: ${response.status}`);
     }
 
-    const contentType = response.headers.get('content-type');
-    if (!contentType || !contentType.includes('application/json')) {
-      console.error('API did not return JSON. Content-Type:', contentType);
-      return [];
+    const { data } = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching product:', error);
+    return null;
+  }
+}
+
+async function fetchAllProducts(): Promise<{ id: string }[]> {
+  try {
+    const response = await fetch(`${API_URL}/api/products`, {
+      next: { revalidate: 60 }
+    });
+
+    if (!response.ok) {
+      throw new Error(`API Error: ${response.status}`);
     }
 
-    const data = await response.json();
-    return data.data.map((product: Record<string, any>) => ({
-      id: product.id.toString(),
+    const { data } = await response.json();
+    return data.map((product: Product) => ({
+      id: product.id.toString()
     }));
   } catch (error) {
     console.error('Error fetching products:', error);
@@ -33,12 +63,18 @@ export async function generateStaticParams() {
   }
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+// Static generation
+export const revalidate = 60;
+
+export async function generateStaticParams() {
+  return fetchAllProducts();
+}
+
+export async function generateMetadata(
+  { params }: { params: Promise<{ id: string }> }
+): Promise<Metadata> {
   const resolvedParams = await params;
-  const productId = parseInt(resolvedParams.id);
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/products/${productId}`);
-  const data = await res.json();
-  const product = data.data;
+  const product = await fetchProduct(resolvedParams.id);
 
   if (!product) {
     return {
@@ -50,33 +86,30 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: product.name,
     description: product.description,
+    openGraph: {
+      title: product.name,
+      description: product.description,
+      images: product.images.map(img => img.url),
+    },
   };
 }
 
-export default async function Page({ params }: Props) {
+// Main component
+export default async function ProductPage(
+  { params }: { params: Promise<{ id: string }> }
+) {
   const resolvedParams = await params;
-  const productId = parseInt(resolvedParams.id);
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/products/${productId}`);
-  const data = await res.json();
-  const product = data.data;
+  const product = await fetchProduct(resolvedParams.id);
 
   if (!product) {
-    return (
-      <PageLayout>
-        <div className="flex items-center justify-center">
-          <p className="text-2xl text-[#0e0e0d]">Không tìm thấy sản phẩm</p>
-        </div>
-      </PageLayout>
-    );
+    notFound();
   }
 
-  // Map lại dữ liệu cho ProductDetail
+  // Transform product data for the component
   const mappedProduct = {
     ...product,
-    image: product.images && product.images.length > 0
-      ? (product.images[0].formats?.thumbnail?.url || product.images[0].url)
-      : '',
-    images: product.images ? product.images.map((img: Record<string, any>) => img.url) : [],
+    image: product.images[0]?.formats?.thumbnail?.url || product.images[0]?.url || '',
+    images: product.images.map(img => img.url),
   };
 
   return (
