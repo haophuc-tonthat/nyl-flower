@@ -40,6 +40,14 @@ const nextConfig = {
       ? 'https://api.sunflower-parisian.cloud'
       : 'http://localhost:1337',
   },
+  async rewrites() {
+    return [
+      {
+        source: '/product/:id',
+        destination: '/product/[id]',
+      },
+    ]
+  },
 };
 
 module.exports = nextConfig; 
