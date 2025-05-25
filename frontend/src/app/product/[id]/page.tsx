@@ -64,6 +64,7 @@ async function fetchAllProducts(): Promise<{ id: string }[]> {
 }
 
 // Static generation
+export const dynamic = 'force-dynamic';
 export const revalidate = 60;
 
 export async function generateStaticParams() {
