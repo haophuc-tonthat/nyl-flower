@@ -35,13 +35,9 @@ const nextConfig = {
     optimizePackageImports: ['framer-motion', 'swiper'],
   },
   env: {
-    NEXT_PUBLIC_API_URL: 'https://api.sunflower-parisian.cloud'
+    NEXT_PUBLIC_API_URL: process.env.NODE_ENV === 'production' ? 'https://api.sunflower-parisian.cloud' : 'http://localhost:1337'
   },
-  metadataBase: new URL('https://sunflower-parisian.cloud'),
   optimizeFonts: true,
-  fontLoaders: [
-    { loader: '@next/font/google', options: { subsets: ['latin'] } },
-  ],
 };
 
 module.exports = nextConfig; 

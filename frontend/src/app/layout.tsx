@@ -43,7 +43,7 @@ export const metadata: Metadata = {
 const garamond = EB_Garamond({
   variable: "--font-garamond",
   subsets: ["latin", "latin-ext"],
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["400"],
 });
 
 const inter = Inter({ subsets: ['latin'] });
@@ -54,8 +54,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="vi" className={`${garamond.variable} ${inter.className}`}>
-      <body className={`aliased font-light`}>
+    <html lang="vi" className={`${garamond.variable} ${inter.className}`} suppressHydrationWarning>
+      <body className={`aliased font-light`} suppressHydrationWarning>
         <LoadingProvider>
           <LoadingOverlay />
           {children}
