@@ -16,7 +16,7 @@ export default async ({ strapi }: { strapi: Core.Strapi }) => {
       const defaultProducts = [
         {
           name: "Bó Hoa Hướng Dương",
-          price: "1.200.000đ",
+          price: 1200000,
           description: "Bó hoa hướng dương tươi tắn kết hợp với hoa baby trắng, mang đến vẻ đẹp rực rỡ và tươi mới cho không gian của bạn.",
           details: [
             "Hướng dương tươi cao cấp",

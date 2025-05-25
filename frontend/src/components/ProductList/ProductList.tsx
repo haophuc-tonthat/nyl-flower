@@ -7,6 +7,13 @@ interface ProductListProps {
   products: Product[];
 }
 
+const formatPrice = (price: number): string => {
+  return new Intl.NumberFormat('vi-VN', {
+    style: 'currency',
+    currency: 'VND'
+  }).format(price);
+};
+
 const ProductList: React.FC<ProductListProps> = ({ products }) => {
   return (
     <div className="min-h-[calc(100vh-6rem)] flex flex-col justify-start pt-8">
@@ -33,7 +40,7 @@ const ProductList: React.FC<ProductListProps> = ({ products }) => {
                   {product.name}
                 </h2>
                 <p className="text-lg font-light text-[#e593cd] tracking-wider">
-                  {product.price}
+                  {formatPrice(product.price)}
                 </p>
               </div>
             </Link>

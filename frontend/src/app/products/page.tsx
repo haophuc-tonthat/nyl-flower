@@ -16,7 +16,7 @@ type ProductImage = {
 type Product = {
   id: number;
   name: string;
-  price: string;
+  price: number;
   description: string;
   details: string[];
   images: string[];
@@ -33,7 +33,7 @@ export default function Page() {
         const mapped: Product[] = data.data.map((product: Record<string, unknown>) => ({
           id: product.id as number,
           name: product.name as string,
-          price: product.price as string,
+          price: Number(product.price),
           description: product.description as string,
           details: product.details as string[],
           image: Array.isArray(product.images) && product.images.length > 0

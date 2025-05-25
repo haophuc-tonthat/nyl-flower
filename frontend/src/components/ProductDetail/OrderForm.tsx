@@ -7,11 +7,19 @@ interface OrderFormProps {
   product: {
     id: number;
     name: string;
-    price: string;
+    price: number;
     image: string;
   };
   onClose: () => void;
 }
+
+const formatPrice = (price: number): string => {
+  return new Intl.NumberFormat('vi-VN', {
+    style: 'currency',
+    currency: 'VND'
+  }).format(price);
+};
+
 // Đặt hàng
 const OrderForm: React.FC<OrderFormProps> = ({ product, onClose }) => {
   const [formData, setFormData] = useState({
@@ -107,7 +115,7 @@ const OrderForm: React.FC<OrderFormProps> = ({ product, onClose }) => {
                     <span className="text-sm sm:text-base font-medium text-[#0e0e0d]/90">{product.name}</span>
                   </div>
                 </td>
-                <td className="p-2 text-right text-sm sm:text-base font-medium text-[#e593cd]">{product.price}</td>
+                <td className="p-2 text-right text-sm sm:text-base font-medium text-[#e593cd]">{formatPrice(product.price)}</td>
               </tr>
             </tbody>
           </table>

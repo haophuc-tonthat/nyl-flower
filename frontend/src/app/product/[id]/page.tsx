@@ -7,7 +7,7 @@ import { notFound } from "next/navigation";
 interface Product {
   id: number;
   name: string;
-  price: string;
+  price: number;
   description: string;
   details: string[];
   images: {

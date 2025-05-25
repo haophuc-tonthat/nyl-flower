@@ -19,11 +19,18 @@ interface FeaturedProductsProps {
   products: {
     id: number;
     name: string;
-    price: string;
+    price: number;
     description: string;
     images: ProductImage[];
   }[];
 }
+
+const formatPrice = (price: number): string => {
+  return new Intl.NumberFormat('vi-VN', {
+    style: 'currency',
+    currency: 'VND'
+  }).format(price);
+};
 
 const container = {
   hidden: { opacity: 0 },
@@ -96,7 +103,7 @@ const FeaturedProducts: React.FC<FeaturedProductsProps> = ({ products }) => {
                   {product.name}
                 </motion.h3>
                 <div className="flex flex-col items-start gap-1 justify-between lg:flex-row lg:items-center">
-                  <p className="text-sm lg:text-base font-medium text-[#e593cd] tracking-wider">{product.price}</p>
+                  <p className="text-sm lg:text-base font-medium text-[#e593cd] tracking-wider">{formatPrice(product.price)}</p>
                   <motion.button 
                     className="text-sm lg:text-base text-[#0e0e0d]/70 hover:text-[#e593cd] transition-colors duration-500 tracking-wider"
                     whileHover={{ x: 5 }}

@@ -10,13 +10,20 @@ interface ProductDetailProps {
   product: {
     id: number;
     name: string;
-    price: string;
+    price: number;
     description: string;
     details: string[];
     images: string[];
     image: string;
   };
 }
+
+const formatPrice = (price: number): string => {
+  return new Intl.NumberFormat('vi-VN', {
+    style: 'currency',
+    currency: 'VND'
+  }).format(price);
+};
 
 const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
   const router = useRouter();
@@ -108,7 +115,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
               >
                 <h1 className="text-3xl font-light tracking-wider text-[#0e0e0d]/90 mb-2">{product.name}</h1>
                 <p className="text-xl font-light text-[#e593cd] tracking-wider">
-                  {product.price}
+                  {formatPrice(product.price)}
                 </p>
               </motion.div>
               
