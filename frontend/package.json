@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@next/font": "^14.2.15",
     "@types/nodemailer": "^6.4.17",
     "axios": "^1.6.7",
     "critters": "^0.0.20",

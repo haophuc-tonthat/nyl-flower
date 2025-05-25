@@ -9,6 +9,7 @@ import { LoadingProvider } from '@/contexts/LoadingContext';
 import { LoadingOverlay } from '@/components/LoadingOverlay';
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://sunflower-parisian.cloud'),
   title: "Tiệm hoa cinh NYL - Shop hoa tươi đẹp tại Quảng Nam - Đà Nẵng",
   description: "Tiệm hoa cinh NYL chuyên cung cấp hoa tươi, bó hoa đẹp, hoa chúc mừng tại Quảng Nam - Đà Nẵng. Với hơn 10 năm kinh nghiệm trong ngành hoa tươi.",
   keywords: "hoa tươi, bó hoa, hoa chúc mừng, tiệm hoa Quảng Nam, tiệm hoa Đà Nẵng, hoa tươi đẹp",
