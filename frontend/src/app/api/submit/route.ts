@@ -6,7 +6,6 @@ import nodemailer from 'nodemailer';
 const SPREADSHEET_ID = process.env.GOOGLE_SHEETS_ID;
 const EMAIL_USER = process.env.EMAIL_USER;
 const EMAIL_PASS = process.env.EMAIL_PASS;
-const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
 
 // Lấy thông tin xác thực từ biến môi trường
 const credentials = {
@@ -165,6 +164,8 @@ const emailTemplate = (content: string) => `
 
 // Hàm gửi email
 async function sendEmail(subject: string, html: string) {
+  const adminEmail = await getAdminEmail();
+  
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -175,7 +176,7 @@ async function sendEmail(subject: string, html: string) {
 
   const mailOptions = {
     from: EMAIL_USER,
-    to: ADMIN_EMAIL,
+    to: adminEmail,
     subject: subject,
     html: emailTemplate(html),
   };
@@ -254,6 +255,24 @@ async function getSheetId(sheets: sheets_v4.Sheets, sheetName: string) {
 
   const sheet = response.data.sheets.find((s) => s.properties.title === sheetName);
   return sheet?.properties.sheetId ?? 0;
+}
+
+// Hàm lấy admin email từ API contact
+async function getAdminEmail(): Promise<string> {
+  try {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/contact`);
+    const data = await response.json();
+    
+    if (!data.data || !data.data.email) {
+      throw new Error('No admin email found in contact info');
+    }
+    
+    return data.data.email;
+  } catch (error) {
+    console.error('Error fetching admin email:', error);
+    // Fallback to environment variable if API fails
+    return process.env.ADMIN_EMAIL || 'admin@cinhnyl.com';
+  }
 }
 
 export async function POST(request: Request) {
