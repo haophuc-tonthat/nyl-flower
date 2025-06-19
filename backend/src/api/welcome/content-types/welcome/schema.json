@@ -25,7 +25,7 @@
     "features": {
       "type": "component",
       "repeatable": true,
-      "component": "shared.feature",
+      "component": "shared.welcome-feature",
       "required": true
     },
     "image": {
